@@ -1,0 +1,191 @@
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  font-size: 24px;
+  color: #1a1a2e;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.app-nav button {
+  padding: 8px 20px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.2s;
+}
+
+.app-nav button:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.app-nav button.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+.app-main {
+  min-height: 400px;
+}
+
+.rooms-page {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.rooms-panel {
+  position: sticky;
+  top: 16px;
+}
+
+.detail-panel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  min-height: 300px;
+}
+
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+.detail-header h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.detail-meta {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.detail-desc {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.facilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #f0f4ff;
+  color: #667eea;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.btn-primary {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.empty-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  color: #aaa;
+  font-size: 15px;
+}
+
+.bookings-page {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+.bookings-page h2 {
+  margin-bottom: 16px;
+}
+
+.loading-text {
+  color: #999;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.toast {
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  animation: slideIn 0.3s ease;
+}
+
+.toast-error {
+  background: #fff0f0;
+  color: #d32f2f;
+  border: 1px solid #ffcdd2;
+}
+
+.toast-success {
+  background: #f0fff4;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

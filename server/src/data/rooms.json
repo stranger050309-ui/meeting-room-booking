@@ -1,0 +1,39 @@
+[
+  {
+    "id": "r003",
+    "name": "远航厅",
+    "capacity": 20,
+    "location": "5楼A区",
+    "facilities": [
+      "投影仪",
+      "白板",
+      "视频会议",
+      "音响",
+      "茶水"
+    ],
+    "description": "大型会议室，适合全员会议和重要汇报"
+  },
+  {
+    "id": "r004",
+    "name": "静思厅",
+    "capacity": 4,
+    "location": "2楼B区",
+    "facilities": [
+      "白板"
+    ],
+    "description": "小型洽谈室，适合1对1沟通和面试"
+  },
+  {
+    "id": "r005",
+    "name": "远见厅",
+    "capacity": 8,
+    "location": "6楼A区",
+    "facilities": [
+      "投影仪",
+      "白板",
+      "视频会议",
+      "大屏电视"
+    ],
+    "description": "高层会议室，配备高清大屏，适合客户演示"
+  }
+]
