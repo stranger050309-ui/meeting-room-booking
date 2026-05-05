@@ -159,37 +159,6 @@
   text-align: center;
 }
 
-.toast {
-  padding: 12px 20px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  font-size: 14px;
-  animation: slideIn 0.3s ease;
-}
-
-.toast-error {
-  background: #fff0f0;
-  color: #d32f2f;
-  border: 1px solid #ffcdd2;
-}
-
-.toast-success {
-  background: #f0fff4;
-  color: #2e7d32;
-  border: 1px solid #c8e6c9;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 768px) {
   .app {
     padding: 0 8px 20px;
@@ -252,10 +221,5 @@
   .bookings-page {
     padding: 16px;
     border-radius: 8px;
-  }
-
-  .toast {
-    font-size: 13px;
-    padding: 10px 14px;
   }
 }

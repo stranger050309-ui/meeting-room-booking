@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { Room, Booking } from './types';
 import {
   fetchRooms,
@@ -13,9 +13,16 @@ import { RoomList } from './components/RoomList';
 import { BookingForm } from './components/BookingForm';
 import { BookingList } from './components/BookingList';
 import { RoomFormDialog } from './components/RoomFormDialog';
+import { Toast } from './components/Toast';
 import './App.css';
 
 type View = 'rooms' | 'bookings';
+
+interface ToastItem {
+  id: number;
+  message: string;
+  type: 'success' | 'error';
+}
 
 export default function App() {
   const [view, setView] = useState<View>('rooms');
@@ -25,16 +32,24 @@ export default function App() {
   const [showForm, setShowForm] = useState(false);
   const [showRoomDialog, setShowRoomDialog] = useState(false);
   const [editingRoom, setEditingRoom] = useState<Room | null>(null);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const toastIdRef = useRef(0);
+
+  const showToast = useCallback((message: string, type: 'success' | 'error') => {
+    const id = ++toastIdRef.current;
+    setToasts((prev) => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 2500);
+  }, []);
 
   const loadRooms = useCallback(async () => {
     try {
       const data = await fetchRooms();
       setRooms(data);
     } catch {
-      setError('加载会议室列表失败');
+      showToast('加载会议室列表失败', 'error');
     }
   }, []);
 
@@ -44,7 +59,7 @@ export default function App() {
       const data = await fetchBookings(roomId, date);
       setBookings(data);
     } catch {
-      setError('加载预约列表失败');
+      showToast('加载预约列表失败', 'error');
     } finally {
       setLoading(false);
     }
@@ -57,15 +72,11 @@ export default function App() {
   const handleSelectRoom = (room: Room) => {
     setSelectedRoom(room);
     setShowForm(false);
-    setError('');
-    setSuccess('');
     loadBookings(room.id);
   };
 
   const handleBookClick = () => {
     setShowForm(true);
-    setError('');
-    setSuccess('');
   };
 
   const handleSubmitBooking = async (data: {
@@ -77,52 +88,45 @@ export default function App() {
     bookedBy: string;
   }) => {
     try {
-      setError('');
       await createBooking(data);
-      setSuccess('预约成功！');
+      showToast('预约成功！', 'success');
       setShowForm(false);
       loadBookings(data.roomId, data.date);
     } catch (e) {
-      setError((e as Error).message);
+      showToast((e as Error).message, 'error');
     }
   };
 
   const handleCancelBooking = async (id: string) => {
     try {
-      setError('');
       await cancelBooking(id);
-      setSuccess('预约已取消');
+      showToast('预约已取消', 'success');
       loadBookings(selectedRoom?.id);
     } catch (e) {
-      setError((e as Error).message);
+      showToast((e as Error).message, 'error');
     }
   };
 
   const handleAddRoom = () => {
     setEditingRoom(null);
     setShowRoomDialog(true);
-    setError('');
-    setSuccess('');
   };
 
   const handleEditRoom = (room: Room) => {
     setEditingRoom(room);
     setShowRoomDialog(true);
-    setError('');
-    setSuccess('');
   };
 
   const handleDeleteRoom = async (room: Room) => {
     try {
-      setError('');
       await deleteRoom(room.id);
-      setSuccess(`已删除会议室"${room.name}"`);
+      showToast(`已删除会议室"${room.name}"`, 'success');
       if (selectedRoom?.id === room.id) {
         setSelectedRoom(null);
       }
       loadRooms();
     } catch (e) {
-      setError((e as Error).message);
+      showToast((e as Error).message, 'error');
     }
   };
 
@@ -134,22 +138,21 @@ export default function App() {
     description: string;
   }) => {
     try {
-      setError('');
       if (editingRoom) {
         await updateRoom(editingRoom.id, data);
-        setSuccess('会议室已更新');
+        showToast('会议室已更新', 'success');
         if (selectedRoom?.id === editingRoom.id) {
           setSelectedRoom({ ...selectedRoom, ...data });
         }
       } else {
         const newRoom = await createRoom(data);
-        setSuccess('会议室已新增');
+        showToast('会议室已新增', 'success');
         setSelectedRoom(newRoom);
       }
       setShowRoomDialog(false);
       loadRooms();
     } catch (e) {
-      setError((e as Error).message);
+      showToast((e as Error).message, 'error');
     }
   };
 
@@ -176,8 +179,7 @@ export default function App() {
         </nav>
       </header>
 
-      {error && <div className="toast toast-error">{error}</div>}
-      {success && <div className="toast toast-success">{success}</div>}
+      <Toast toasts={toasts} />
 
       <main className="app-main">
         {view === 'rooms' && (
