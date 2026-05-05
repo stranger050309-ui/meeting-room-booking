@@ -11,9 +11,6 @@ function validateRoom(body, isUpdate) {
   if (!isUpdate || body.capacity !== undefined) {
     if (!Number.isInteger(body.capacity) || body.capacity < 1) errors.push('容纳人数必须是正整数');
   }
-  if (!isUpdate || body.location !== undefined) {
-    if (!body.location || !body.location.trim()) errors.push('位置不能为空');
-  }
   return errors;
 }
 
@@ -42,7 +39,7 @@ router.post('/', (req, res) => {
     id: uuidv4(),
     name: req.body.name.trim(),
     capacity: req.body.capacity,
-    location: req.body.location.trim(),
+    location: (req.body.location || '').trim(),
     facilities: req.body.facilities || [],
     description: (req.body.description || '').trim(),
   };
@@ -68,7 +65,7 @@ router.put('/:id', (req, res) => {
   const existing = rooms[index];
   if (req.body.name !== undefined) existing.name = req.body.name.trim();
   if (req.body.capacity !== undefined) existing.capacity = req.body.capacity;
-  if (req.body.location !== undefined) existing.location = req.body.location.trim();
+  if (req.body.location !== undefined) existing.location = (req.body.location || '').trim();
   if (req.body.facilities !== undefined) existing.facilities = req.body.facilities;
   if (req.body.description !== undefined) existing.description = req.body.description.trim();
 

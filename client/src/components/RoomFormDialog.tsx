@@ -64,12 +64,11 @@ export function RoomFormDialog({ room, onSave, onClose }: Props) {
             />
           </div>
           <div className="dialog-field">
-            <label>位置 *</label>
+            <label>位置</label>
             <input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="例如：3楼A区"
-              required
+              placeholder="例如：3楼A区（选填）"
             />
           </div>
           <div className="dialog-field">

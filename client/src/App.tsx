@@ -199,7 +199,7 @@ export default function App() {
                     <div>
                       <h2>{selectedRoom.name}</h2>
                       <p className="detail-meta">
-                        {selectedRoom.location} · 容纳 {selectedRoom.capacity} 人
+                        {selectedRoom.location ? `${selectedRoom.location} · ` : ''}容纳 {selectedRoom.capacity} 人
                       </p>
                       <p className="detail-desc">{selectedRoom.description}</p>
                       <div className="facilities">

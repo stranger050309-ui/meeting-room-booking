@@ -130,3 +130,42 @@
 .btn-delete-room:hover {
   background: #fff0f0;
 }
+
+@media (max-width: 768px) {
+  .room-list-header {
+    padding: 10px 14px;
+  }
+
+  .room-list-title {
+    font-size: 15px;
+  }
+
+  .btn-add {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+
+  .room-card {
+    padding: 10px 12px;
+  }
+
+  .room-card-name {
+    font-size: 14px;
+  }
+
+  .room-card-info {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .room-card-actions {
+    gap: 2px;
+    margin-left: 4px;
+  }
+}

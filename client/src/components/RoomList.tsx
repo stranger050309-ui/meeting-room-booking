@@ -28,7 +28,7 @@ export function RoomList({ rooms, selectedId, onSelect, onAdd, onEdit, onDelete 
             <div className="room-card-main" onClick={() => onSelect(room)}>
               <div className="room-card-name">{room.name}</div>
               <div className="room-card-info">
-                <span>{room.location}</span>
+                {room.location ? <span>{room.location}</span> : null}
                 <span>容纳 {room.capacity} 人</span>
               </div>
               <div className="room-card-facilities">
